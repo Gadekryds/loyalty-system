@@ -1,7 +1,7 @@
 package dev.gadekryds.user.util;
 
 
-import dev.gadekryds.common.EntityBuilder;
+import dev.gadekryds.common.eventsourcing.EntityBuilder;
 import dev.gadekryds.user.User;
 import org.springframework.stereotype.Service;
 

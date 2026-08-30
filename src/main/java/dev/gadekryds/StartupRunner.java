@@ -1,5 +1,10 @@
 package dev.gadekryds;
 
+import dev.gadekryds.common.Bus;
+import dev.gadekryds.common.Request;
+import dev.gadekryds.common.Response;
+import dev.gadekryds.product.Product;
+import dev.gadekryds.product.dto.CreateProductCommand;
 import dev.gadekryds.product.features.createProduct.ProductCreatedEvent;
 import dev.gadekryds.product.util.ProductBuilder;
 import dev.gadekryds.user.features.createUser.UserCreated;
@@ -20,13 +25,15 @@ import java.util.UUID;
 public class StartupRunner implements CommandLineRunner {
     private final ApplicationEventPublisher publisher;
     private final Logger logger = LoggerFactory.getLogger(StartupRunner.class);
+    private final Bus bus;
 
     @Autowired
     private UserBuilder userBuilder;
     @Autowired
     private ProductBuilder productBuilder;
-    public StartupRunner(ApplicationEventPublisher publisher) {
+    public StartupRunner(ApplicationEventPublisher publisher, Bus bus) {
         this.publisher = publisher;
+        this.bus = bus;
     }
 
     @Override
@@ -43,5 +50,8 @@ public class StartupRunner implements CommandLineRunner {
         var product = productBuilder.build(List.of(
                 new ProductCreatedEvent(uuid2, "Disco ball")
         ));
+
+        Response<Product> resp = bus.request(new CreateProductCommand("test", "test2"));
+        IO.println(resp.hasException() ? resp.exception.getMessage() : resp.data);
     }
 }

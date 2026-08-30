@@ -1,7 +1,6 @@
 package dev.gadekryds.common;
 
-public interface Handler<T, E extends Action<T>>  {
+public interface RequestHandler<T, E>  {
 
     T Handle(E req);
-
 }

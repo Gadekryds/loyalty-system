@@ -1,6 +1,6 @@
 package dev.gadekryds.product.util;
 
-import dev.gadekryds.common.EntityBuilder;
+import dev.gadekryds.common.eventsourcing.EntityBuilder;
 import dev.gadekryds.product.Product;
 import org.springframework.stereotype.Service;
 

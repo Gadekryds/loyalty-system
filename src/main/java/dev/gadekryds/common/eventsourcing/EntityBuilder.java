@@ -1,4 +1,4 @@
-package dev.gadekryds.common;
+package dev.gadekryds.common.eventsourcing;
 
 import java.util.HashMap;
 import java.util.List;

@@ -1,0 +1,32 @@
+
+CREATE TABLE IF NOT EXISTS PRODUCT_KIND (
+    ID      SERIAL PRIMARY KEY,
+    NAME    TEXT NOT NULL
+);
+
+INSERT INTO PRODUCT_KIND
+(NAME) VALUES ('Physical'),
+              ('Digital'),
+              ('Subscription');
+
+CREATE TABLE IF NOT EXISTS PRODUCER (
+    ID          UUID DEFAULT uuidv7() PRIMARY KEY,
+    NAME        TEXT NOT NULL,
+    DESCRIPTION TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS PRODUCT (
+    ID              uuid DEFAULT uuidv7() PRIMARY KEY,
+    NAME            TEXT NOT NULL,
+    DESCRIPTION     TEXT NOT NULL,
+    KIND_ID         INTEGER NOT NULL REFERENCES PRODUCT_KIND(ID),
+    PRODUCER_ID     uuid NOT NULL REFERENCES PRODUCER(ID),
+    CREATED         TIMESTAMPTZ DEFAULT (now() at time zone 'utc'),
+    MODIFIED        TIMESTAMPTZ DEFAULT (now() at time zone 'utc')
+);
+
+CREATE TRIGGER set_modified_timestamp
+    BEFORE UPDATE ON PRODUCT
+    FOR EACH ROW
+    WHEN (OLD IS DISTINCT FROM NEW)
+EXECUTE FUNCTION update_modified_column();

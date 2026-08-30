@@ -5,3 +5,9 @@ spring:
   mvc:
     problemdetails:
       enabled=true:
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/loyaltysystem
+    username: myuser
+    password: secret
+

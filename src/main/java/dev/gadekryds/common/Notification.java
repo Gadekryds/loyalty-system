@@ -1,4 +1,4 @@
 package dev.gadekryds.common;
 
-public interface Event<U> {
+public interface Notification {
 }

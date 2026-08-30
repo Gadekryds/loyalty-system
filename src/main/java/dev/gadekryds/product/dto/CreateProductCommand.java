@@ -1,10 +1,10 @@
 package dev.gadekryds.product.dto;
 
-import dev.gadekryds.common.Command;
+import dev.gadekryds.common.Request;
 import dev.gadekryds.product.Product;
 
-public record CreateProductCommand(
+public record CreateProductCommand (
         String title,
         String description
-) implements Command<Product> {
+) implements Request<Product> {
 }

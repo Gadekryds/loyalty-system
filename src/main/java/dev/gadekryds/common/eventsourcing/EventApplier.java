@@ -1,6 +1,4 @@
-package dev.gadekryds.common;
-
-import java.util.Objects;
+package dev.gadekryds.common.eventsourcing;
 
 
 public interface EventApplier<T, E extends Event<T>> {
